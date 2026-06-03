@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)file:///C:/Users/maran/Downloads/index_3.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LANDMADE — American Clothing Co.</title>
+  <link href="./LANDMADE — American Clothing Co._files/css2" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --red:#C8102E;--navy:#07101F;--cream:#F4EFE6;--gold:#C9921A;
+      --white:#fff;--gray:#888;--red2:#ff1a3a;
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Barlow',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;cursor:none;}
+
+    /* CUSTOM CURSOR */
+    .cursor{position:fixed;width:12px;height:12px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s,width .2s,height .2s;}
+    .cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(200,16,46,0.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .12s ease,width .25s,height .25s,opacity .2s;}
+    .cursor.hovered{width:6px;height:6px;}
+    .cursor-ring.hovered{width:52px;height:52px;border-color:var(--red);}
+
+    /* CANVAS PARTICLES */
+    #particles{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+    /* NAV */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:500;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:1.2rem 3rem;
+      transition:background .4s,backdrop-filter .4s,padding .3s;
+    }
+    nav.scrolled{background:rgba(7,16,31,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(200,16,46,0.3);padding:.8rem 3rem;}
+    .nav-logo{
+      font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:5px;
+      color:var(--white);text-decoration:none;
+      position:relative;
+    }
+    .nav-logo::after{content:'®';font-size:.55rem;vertical-align:super;color:var(--red);margin-left:2px;}
+    .nav-links{display:flex;gap:2.5rem;list-style:none;}
+    .nav-links a{
+      font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.85rem;
+      letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7);
+      text-decoration:none;position:relative;transition:color .2s;
+    }
+    .nav-links a::after{
+      content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;
+      background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .3s;
+    }
+    .nav-links a:hover{color:#fff;}
+    .nav-links a:hover::after{transform:scaleX(1);}
+    .nav-right{display:flex;align-items:center;gap:1.5rem;}
+    .nav-search{background:none;border:none;color:rgba(255,255,255,.5);font-size:1rem;cursor:none;transition:color .2s;}
+    .nav-search:hover{color:white;}
+    .nav-cart-btn{
+      font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.78rem;
+      letter-spacing:2.5px;text-transform:uppercase;
+      background:var(--red);color:white;border:none;
+      padding:.65rem 1.4rem;cursor:none;
+      position:relative;overflow:hidden;transition:transform .2s;
+    }
+    .nav-cart-btn::before{
+      content:'';position:absolute;inset:0;background:rgba(255,255,255,.15);
+      transform:translateX(-100%) skewX(-15deg);transition:transform .3s;
+    }
+    .nav-cart-btn:hover::before{transform:translateX(100%) skewX(-15deg);}
+    .nav-cart-btn:hover{transform:translateY(-1px);}
+
+    /* HERO */
+    .hero{
+      min-height:100vh;position:relative;display:flex;flex-direction:column;
+      justify-content:center;overflow:hidden;
+      background:radial-gradient(ellipse at 60% 40%, #0d1f3a 0%, #07101F 60%);
+    }
+    .hero-noise{
+      position:absolute;inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events:none;opacity:.4;
+    }
+    .hero-grid-lines{
+      position:absolute;inset:0;
+      background-image:linear-gradient(rgba(200,16,46,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,16,46,.04) 1px, transparent 1px);
+      background-size:60px 60px;
+      pointer-events:none;
+    }
+    .hero-content{
+      position:relative;z-index:2;
+      display:grid;grid-template-columns:1fr 1fr;
+      align-items:center;gap:4rem;
+      padding:8rem 5rem 5rem;
+      max-width:1400px;margin:0 auto;width:100%;
+    }
+    .hero-left{}
+    .hero-tag{
+      display:inline-flex;align-items:center;gap:.6rem;
+      font-family:'Barlow Condensed',sans-serif;font-size:.72rem;
+      letter-spacing:4px;text-transform:uppercase;color:var(--red);
+      border:1px solid rgba(200,16,46,.4);padding:.4rem 1rem;
+      margin-bottom:2rem;
+      animation:fadeInDown .8s ease .2s both;
+    }
+    .hero-tag-dot{width:6px;height:6px;background:var(--red);border-radius:50%;animation:blink 1.5s ease infinite;}
+    @keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+    @keyframes fadeInDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes fadeInLeft{from{opacity:0;transform:translateX(60px);}to{opacity:1;transform:translateX(0);}}
+
+    .hero-headline{
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(5rem,9vw,9.5rem);
+      line-height:.9;letter-spacing:2px;
+      color:var(--white);
+      animation:fadeInUp .9s ease .3s both;
+    }
+    .hero-headline .line-red{color:var(--red);display:block;}
+    .hero-headline .line-outline{
+      -webkit-text-stroke:2px rgba(255,255,255,.25);
+      color:transparent;display:block;
+    }
+    .hero-sub{
+      font-size:1rem;font-weight:300;
+      color:rgba(255,255,255,.55);
+      max-width:360px;line-height:1.8;
+      margin:1.8rem 0 2.5rem;
+      animation:fadeInUp 1s ease .5s both;
+    }
+    .hero-btns{
+      display:flex;gap:1rem;flex-wrap:wrap;
+      animation:fadeInUp 1s ease .65s both;
+    }
+    .btn-fire{
+      font-family:'Barlow Condensed',sans-serif;font-weight:700;
+      font-size:.85rem;letter-spacing:3px;text-transform:uppercase;
+      background:var(--red);color:white;border:none;
+      padding:1.1rem 2.8rem;cursor:none;
+      position:relative;overflow:hidden;
+      transition:transform .2s,box-shadow .2s;
+      text-decoration:none;display:inline-block;
+    }
+    .btn-fire:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(200,16,46,.5);}
+    .btn-fire::after{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(135deg,rgba(255,255,255,.15) 0%,transparent 60%);
+    }
+    .btn-ghost{
+      font-family:'Barlow Condensed',sans-serif;font-weight:700;
+      font-size:.85rem;letter-spacing:3px;text-transform:uppercase;
+      background:transparent;color:white;
+      border:1.5px solid rgba(255,255,255,.25);
+      padding:1.1rem 2.8rem;cursor:none;
+      transition:border-color .2s,transform .2s;
+      text-decoration:none;display:inline-block;
+    }
+    .btn-ghost:hover{border-color:white;transform:translateY(-3px);}
+
+    /* HERO VISUAL — 3D rotating badge */
+    .hero-right{
+      display:flex;justify-content:center;align-items:center;
+      animation:fadeInLeft .9s ease .4s both;
+      position:relative;
+    }
+    .badge-wrap{
+      position:relative;width:420px;height:420px;
+      animation:rotateBadge 20s linear infinite;
+    }
+    @keyframes rotateBadge{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+    .badge-ring{
+      position:absolute;inset:0;border-radius:50%;
+      border:2px solid rgba(200,16,46,.3);
+    }
+    .badge-ring:nth-child(2){inset:20px;border-color:rgba(200,16,46,.15);animation:rotateBadge 12s linear infinite reverse;}
+    .badge-ring:nth-child(3){inset:40px;border-color:rgba(200,16,46,.08);}
+    .badge-center{
+      position:absolute;
+      inset:60px;border-radius:50%;
+      background:radial-gradient(circle at 35% 35%, #162848, #07101F);
+      border:3px solid var(--red);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      box-shadow:0 0 100px rgba(200,16,46,.35), inset 0 0 60px rgba(200,16,46,.08);
+      animation:rotateBadge 20s linear infinite reverse;
+    }
+    .badge-flag-svg{width:160px;opacity:.95;border-radius:4px;overflow:hidden;}
+    .badge-name{
+      font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:7px;
+      color:var(--gold);margin-top:.8rem;
+    }
+    .badge-sub{
+      font-family:'Barlow Condensed',sans-serif;font-size:.65rem;letter-spacing:4px;
+      color:var(--gold);text-transform:uppercase;margin-top:.25rem;
+    }
+    .badge-stars{
+      position:absolute;inset:0;border-radius:50%;
+      background:transparent;
+    }
+    .badge-star{
+      position:absolute;font-size:.6rem;color:var(--gold);opacity:.7;
+    }
+
+    /* HERO SCROLL INDICATOR */
+    .scroll-hint{
+      position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+      display:flex;flex-direction:column;align-items:center;gap:.6rem;
+      animation:fadeInUp 1s ease 1.2s both;
+    }
+    .scroll-hint span{font-family:'Barlow Condensed',sans-serif;font-size:.65rem;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.3);}
+    .scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,rgba(200,16,46,.8),transparent);animation:scrollDown 1.8s ease infinite;}
+    @keyframes scrollDown{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform:scaleY(1);transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+    /* DOUBLE MARQUEE */
+    .marquee-section{overflow:hidden;background:var(--red);padding:.65rem 0;}
+    .marquee-track{display:flex;animation:marqueeFlow 16s linear infinite;}
+    .marquee-track2{display:flex;animation:marqueeFlow 22s linear infinite reverse;background:rgba(0,0,0,.15);padding:.5rem 0;}
+    @keyframes marqueeFlow{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+    .marquee-item{
+      display:inline-flex;align-items:center;gap:1.5rem;white-space:nowrap;padding:0 1.5rem;
+      font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:4px;color:white;
+    }
+    .marquee-item .m-star{color:rgba(255,255,255,.5);font-size:.8rem;}
+    .marquee-track2 .marquee-item{font-size:.8rem;letter-spacing:5px;color:rgba(255,255,255,.6);}
+
+    /* SECTION COMMONS */
+    .sec-label{
+      font-family:'Barlow Condensed',sans-serif;font-size:.7rem;letter-spacing:6px;
+      text-transform:uppercase;color:var(--red);margin-bottom:.5rem;display:block;
+    }
+    .sec-title{
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(2.8rem,5vw,4.5rem);letter-spacing:2px;
+      line-height:1;
+    }
+
+    /* CATEGORIES — full bleed bento grid */
+    .categories{padding:5rem 3rem;background:var(--cream);}
+    .cat-header{text-align:center;margin-bottom:3rem;}
+    .cat-header .sec-title{color:var(--navy);}
+    .cat-header .sec-label{color:var(--red);}
+    .bento{
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr;
+      grid-template-rows:280px 280px;
+      gap:12px;max-width:1200px;margin:0 auto;
+    }
+    .bento-card{
+      position:relative;overflow:hidden;cursor:none;
+      background:var(--navy);
+    }
+    .bento-card:first-child{grid-row:span 2;}
+    .bento-card-bg{
+      position:absolute;inset:0;
+      transition:transform .6s cubic-bezier(.25,.46,.45,.94);
+      display:flex;align-items:center;justify-content:center;
+    }
+    .bento-card:hover .bento-card-bg{transform:scale(1.06);}
+    .bento-ghost-text{
+      position:absolute;
+      font-family:'Bebas Neue',sans-serif;font-size:9rem;
+      color:rgba(255,255,255,.04);letter-spacing:-4px;
+      bottom:-1rem;right:-1rem;line-height:1;pointer-events:none;
+      transition:transform .6s;
+    }
+    .bento-card:hover .bento-ghost-text{transform:scale(1.04) translate(4px,-4px);}
+    .bento-emoji{font-size:5.5rem;filter:drop-shadow(0 4px 20px rgba(0,0,0,.5));}
+    .bento-card:first-child .bento-emoji{font-size:8rem;}
+    .bento-overlay{
+      position:absolute;inset:0;
+      background:linear-gradient(to top, rgba(7,16,31,.97) 0%, rgba(7,16,31,.2) 50%, transparent 100%);
+    }
+    .bento-info{
+      position:absolute;bottom:0;left:0;right:0;padding:1.8rem;
+      transform:translateY(4px);transition:transform .3s;
+    }
+    .bento-card:hover .bento-info{transform:translateY(0);}
+    .bento-name{
+      font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:3px;color:white;
+      display:block;
+    }
+    .bento-card:first-child .bento-name{font-size:3.5rem;}
+    .bento-meta{
+      display:flex;align-items:center;justify-content:space-between;margin-top:.3rem;
+    }
+    .bento-count{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;letter-spacing:2px;color:var(--red);text-transform:uppercase;}
+    .bento-arrow{
+      width:34px;height:34px;background:var(--red);
+      display:flex;align-items:center;justify-content:center;
+      color:white;font-size:.9rem;
+      transform:translateX(10px);opacity:0;transition:transform .3s,opacity .3s;
+    }
+    .bento-card:hover .bento-arrow{transform:translateX(0);opacity:1;}
+    /* color accents per card */
+    .bento-card[data-cat="tee"]{background:linear-gradient(135deg,#0c1d38,#07101F);}
+    .bento-card[data-cat="hat"]{background:linear-gradient(135deg,#1e0810,#07101F);}
+    .bento-card[data-cat="tank"]{background:linear-gradient(135deg,#07181a,#07101F);}
+    .bento-card[data-cat="shorts"]{background:linear-gradient(135deg,#18140a,#07101F);}
+
+    /* PRODUCT SHOWCASE */
+    .products{padding:5rem 3rem;background:#0b1525;}
+    .products-header{
+      display:flex;align-items:flex-end;justify-content:space-between;
+      margin-bottom:3rem;max-width:1200px;margin-left:auto;margin-right:auto;
+    }
+    .products-header .sec-title{color:white;}
+    .view-all{
+      font-family:'Barlow Condensed',sans-serif;font-weight:600;
+      font-size:.78rem;letter-spacing:3px;text-transform:uppercase;
+      color:rgba(255,255,255,.4);text-decoration:none;
+      border-bottom:1px solid rgba(255,255,255,.15);
+      padding-bottom:2px;transition:color .2s,border-color .2s;
+    }
+    .view-all:hover{color:white;border-color:white;}
+    .products-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);
+      gap:1.5rem;max-width:1200px;margin:0 auto;
+    }
+    .product-card{
+      background:#0f1e34;position:relative;overflow:hidden;cursor:none;
+      transition:transform .35s cubic-bezier(.25,.46,.45,.94),box-shadow .35s;
+      group:true;
+    }
+    .product-card:hover{transform:translateY(-8px);box-shadow:0 24px 60px rgba(0,0,0,.5);}
+    .product-img{
+      height:300px;display:flex;align-items:center;justify-content:center;
+      font-size:7rem;position:relative;overflow:hidden;
+    }
+    .product-img-bg{
+      position:absolute;inset:0;
+      transition:transform .5s cubic-bezier(.25,.46,.45,.94);
+    }
+    .product-card:hover .product-img-bg{transform:scale(1.07);}
+    .product-img-emoji{position:relative;z-index:1;filter:drop-shadow(0 8px 24px rgba(0,0,0,.6));transition:transform .4s;}
+    .product-card:hover .product-img-emoji{transform:scale(1.08) translateY(-6px);}
+    .product-shine{
+      position:absolute;inset:0;z-index:2;
+      background:linear-gradient(135deg,rgba(255,255,255,.08) 0%,transparent 50%);
+      opacity:0;transition:opacity .3s;
+    }
+    .product-card:hover .product-shine{opacity:1;}
+    .product-badge{
+      position:absolute;top:1rem;left:1rem;z-index:3;
+      font-family:'Barlow Condensed',sans-serif;font-weight:700;
+      font-size:.65rem;letter-spacing:2px;text-transform:uppercase;
+      padding:.3rem .8rem;
+    }
+    .badge-new{background:var(--red);color:white;}
+    .badge-hot{background:var(--gold);color:#07101F;}
+    .badge-ltd{background:rgba(255,255,255,.1);color:white;border:1px solid rgba(255,255,255,.2);}
+    .product-wishlist{
+      position:absolute;top:1rem;right:1rem;z-index:3;
+      width:32px;height:32px;background:rgba(0,0,0,.4);border:none;
+      display:flex;align-items:center;justify-content:center;
+      color:rgba(255,255,255,.4);font-size:.85rem;cursor:none;
+      opacity:0;transition:opacity .3s,color .2s;
+      border-radius:50%;
+    }
+    .product-card:hover .product-wishlist{opacity:1;}
+    .product-wishlist:hover{color:var(--red);}
+    .product-info{padding:1.3rem 1.4rem 1.4rem;}
+    .product-name{
+      font-family:'Barlow Condensed',sans-serif;font-weight:700;
+      font-size:1.05rem;letter-spacing:1.5px;text-transform:uppercase;
+      color:white;margin-bottom:.25rem;
+    }
+    .product-desc{font-size:.82rem;color:rgba(255,255,255,.35);line-height:1.55;margin-bottom:1.1rem;}
+    .product-footer2{display:flex;align-items:center;justify-content:space-between;}
+    .product-price2{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:white;letter-spacing:1px;}
+    .product-sizes{display:flex;gap:.3rem;}
+    .size-dot{
+      width:26px;height:26px;border-radius:50%;
+      border:1px solid rgba(255,255,255,.15);
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Barlow Condensed',sans-serif;font-size:.6rem;color:rgba(255,255,255,.4);
+      transition:border-color .2s,color .2s;cursor:none;
+    }
+    .size-dot:hover{border-color:var(--red);color:white;}
+    .add-to-cart{
+      font-family:'Barlow Condensed',sans-serif;font-weight:700;
+      font-size:.72rem;letter-spacing:2px;text-transform:uppercase;
+      background:transparent;color:rgba(255,255,255,.5);
+      border:1px solid rgba(255,255,255,.15);
+      padding:.55rem 1.2rem;cursor:none;
+      transition:background .2s,color .2s,border-color .2s;
+      margin-top:.9rem;width:100%;
+    }
+    .add-to-cart:hover{background:var(--red);color:white;border-color:var(--red);}
+    .add-to-cart.added{background:#1a5c2a;color:white;border-color:#1a5c2a;}
+
+    /* FULL WIDTH BANNER */
+    .banner{
+      position:relative;padding:6rem 5rem;overflow:hidden;
+      background:var(--red);
+      display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:4rem;
+    }
+    .banner::before{
+      content:'USA';
+      position:absolute;font-family:'Bebas Neue',sans-serif;
+      font-size:28vw;color:rgba(0,0,0,.1);
+      right:-3vw;top:50%;transform:translateY(-50%);
+      letter-spacing:-2vw;pointer-events:none;line-height:1;
+    }
+    .banner-text{position:relative;z-index:1;}
+    .banner-label{font-family:'Barlow Condensed',sans-serif;font-size:.72rem;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:1rem;display:block;}
+    .banner-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,5vw,5rem);color:white;line-height:.95;margin-bottom:1.5rem;}
+    .banner-body{font-size:.95rem;font-weight:300;color:rgba(255,255,255,.75);line-height:1.8;max-width:400px;margin-bottom:2rem;}
+    .banner-stats{display:flex;gap:3rem;}
+    .bstat-num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:white;letter-spacing:1px;display:block;}
+    .bstat-label{font-family:'Barlow Condensed',sans-serif;font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+    .banner-visual{
+      position:relative;z-index:1;
+      display:grid;grid-template-columns:1fr 1fr;gap:1rem;
+    }
+    .banner-card{
+      background:rgba(0,0,0,.2);backdrop-filter:blur(10px);
+      padding:1.5rem;border:1px solid rgba(255,255,255,.1);
+      transition:transform .3s,background .3s;cursor:none;
+    }
+    .banner-card:hover{transform:translateY(-4px);background:rgba(0,0,0,.3);}
+    .banner-card-icon{font-size:1.8rem;margin-bottom:.7rem;display:block;}
+    .banner-card-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:1px;text-transform:uppercase;color:white;margin-bottom:.3rem;}
+    .banner-card-text{font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.5;}
+
+    /* TESTIMONIALS */
+    .testimonials{padding:5rem 3rem;background:var(--cream);}
+    .test-header{text-align:center;margin-bottom:3.5rem;}
+    .test-header .sec-title{color:var(--navy);}
+    .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;margin:0 auto;}
+    .test-card{
+      background:white;padding:2rem;
+      border-bottom:3px solid transparent;
+      transition:border-color .3s,transform .3s,box-shadow .3s;cursor:none;
+    }
+    .test-card:hover{border-color:var(--red);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.08);}
+    .test-stars{color:var(--gold);font-size:.9rem;letter-spacing:2px;margin-bottom:1rem;}
+    .test-quote{
+      font-size:.92rem;color:#444;line-height:1.75;margin-bottom:1.3rem;
+      font-style:italic;
+    }
+    .test-author{display:flex;align-items:center;gap:.8rem;}
+    .test-avatar{
+      width:36px;height:36px;border-radius:50%;
+      background:var(--navy);display:flex;align-items:center;justify-content:center;
+      font-size:1rem;
+    }
+    .test-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:1px;text-transform:uppercase;color:var(--navy);}
+    .test-location{font-size:.75rem;color:var(--gray);}
+
+    /* NEWSLETTER */
+    .newsletter{
+      padding:6rem 3rem;
+      background:var(--navy);
+      text-align:center;
+      position:relative;overflow:hidden;
+    }
+    .newsletter::before{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse at center, rgba(200,16,46,.12) 0%,transparent 70%);
+      pointer-events:none;
+    }
+    .newsletter-label{font-family:'Barlow Condensed',sans-serif;font-size:.7rem;letter-spacing:6px;text-transform:uppercase;color:var(--red);margin-bottom:1rem;display:block;}
+    .newsletter-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,6vw,5.5rem);color:white;letter-spacing:3px;line-height:.95;margin-bottom:1rem;}
+    .newsletter-sub{font-size:.95rem;font-weight:300;color:rgba(255,255,255,.45);margin-bottom:2.5rem;}
+    .newsletter-form{display:flex;gap:0;max-width:500px;margin:0 auto;}
+    .nl-input{
+      flex:1;padding:1.1rem 1.4rem;font-family:'Barlow',sans-serif;
+      font-size:.9rem;border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.06);color:white;outline:none;
+      transition:border-color .2s;
+    }
+    .nl-input::placeholder{color:rgba(255,255,255,.3);}
+    .nl-input:focus{border-color:var(--red);}
+    .nl-btn{
+      font-family:'Barlow Condensed',sans-serif;font-weight:700;
+      font-size:.8rem;letter-spacing:3px;text-transform:uppercase;
+      background:var(--red);color:white;border:none;
+      padding:1.1rem 2rem;cursor:none;white-space:nowrap;
+      transition:background .2s;
+    }
+    .nl-btn:hover{background:#a00d24;}
+
+    /* FOOTER */
+    footer{background:#040d1a;padding:4rem 3rem 2rem;}
+    .footer-grid{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:3rem;}
+    .footer-brand{}
+    .footer-logo2{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:5px;color:white;margin-bottom:.7rem;}
+    .footer-logo2 span{color:var(--red);}
+    .footer-tagline2{font-size:.85rem;color:rgba(255,255,255,.3);line-height:1.75;margin-bottom:1.5rem;max-width:260px;}
+    .footer-socials{display:flex;gap:.6rem;}
+    .soc{
+      width:38px;height:38px;border:1px solid rgba(255,255,255,.1);
+      display:flex;align-items:center;justify-content:center;
+      color:rgba(255,255,255,.35);font-size:.78rem;
+      cursor:none;text-decoration:none;
+      font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:1px;
+      transition:border-color .2s,color .2s,background .2s;
+    }
+    .soc:hover{border-color:var(--red);color:white;background:rgba(200,16,46,.15);}
+    .footer-col-h{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:white;margin-bottom:1.2rem;}
+    .footer-links2{list-style:none;display:flex;flex-direction:column;gap:.65rem;}
+    .footer-links2 a{font-size:.83rem;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s;}
+    .footer-links2 a:hover{color:white;}
+    .footer-bottom2{
+      border-top:1px solid rgba(255,255,255,.05);padding-top:1.5rem;
+      display:flex;align-items:center;justify-content:space-between;
+      font-size:.73rem;color:rgba(255,255,255,.2);
+    }
+
+    /* SCROLL REVEAL */
+    .reveal{opacity:0;transform:translateY(36px);transition:opacity .75s ease,transform .75s ease;}
+    .reveal.revealed{opacity:1;transform:translateY(0);}
+    .reveal-delay-1{transition-delay:.1s;}
+    .reveal-delay-2{transition-delay:.2s;}
+    .reveal-delay-3{transition-delay:.3s;}
+    .reveal-delay-4{transition-delay:.4s;}
+
+    /* TOAST */
+    .toast{
+      position:fixed;bottom:2rem;right:2rem;z-index:800;
+      background:white;color:var(--navy);
+      padding:1rem 1.5rem;
+      font-family:'Barlow Condensed',sans-serif;font-weight:700;
+      font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase;
+      border-left:4px solid var(--red);
+      transform:translateX(200%);transition:transform .35s cubic-bezier(.25,.46,.45,.94);
+      box-shadow:0 8px 30px rgba(0,0,0,.3);
+    }
+    .toast.show{transform:translateX(0);}
+
+    @media(max-width:900px){
+      .hero-content{grid-template-columns:1fr;padding:7rem 2rem 4rem;}
+      .hero-right{display:none;}
+      .bento{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+      .bento-card:first-child{grid-row:span 1;grid-column:span 2;}
+      .products-grid{grid-template-columns:1fr 1fr;}
+      .banner{grid-template-columns:1fr;}
+      .banner-visual{display:none;}
+      .test-grid{grid-template-columns:1fr;}
+      .footer-grid{grid-template-columns:1fr 1fr;}
+      nav{padding:1rem 1.5rem;}
+      nav.scrolled{padding:.7rem 1.5rem;}
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="particles" width="1681" height="1280"></canvas>
+<div class="cursor" id="cursor" style="left: 703px; top: 498px;"></div>
+<div class="cursor-ring" id="cursorRing" style="left: 797.482px; top: 481.4px;"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="file:///C:/Users/maran/Downloads/index_3.html#" class="nav-logo">LANDMADE</a>
+  <ul class="nav-links">
+    <li><a href="file:///C:/Users/maran/Downloads/index_3.html#shop">Shop</a></li>
+    <li><a href="file:///C:/Users/maran/Downloads/index_3.html#drops">New Drops</a></li>
+    <li><a href="file:///C:/Users/maran/Downloads/index_3.html#story">Our Story</a></li>
+    <li><a href="file:///C:/Users/maran/Downloads/index_3.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-search">⌕</button>
+    <button class="nav-cart-btn" id="cartBtn">Bag (0)</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-tag"><span class="hero-tag-dot"></span>🇺🇸 American Streetwear — Est. 2024</div>
+      <h1 class="hero-headline">
+        <span>Built</span>
+        <span class="line-red">For The</span>
+        <span class="line-outline">Free.</span>
+      </h1>
+      <p class="hero-sub">Clothing forged from American grit. Bold designs, heavyweight quality — worn by the generation that won't back down.</p>
+      <div class="hero-btns">
+        <a href="file:///C:/Users/maran/Downloads/index_3.html#drops" class="btn-fire">Shop New Drops</a>
+        <a href="file:///C:/Users/maran/Downloads/index_3.html#shop" class="btn-ghost">Browse All</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="badge-wrap">
+        <div class="badge-ring"></div>
+        <div class="badge-ring"></div>
+        <div class="badge-ring"></div>
+        <div class="badge-center">
+          <svg class="badge-flag-svg" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="120" fill="#B22234"></rect>
+            <rect y="9.23" width="200" height="9.23" fill="#fff"></rect>
+            <rect y="18.46" width="200" height="9.23" fill="#B22234"></rect>
+            <rect y="27.69" width="200" height="9.23" fill="#fff"></rect>
+            <rect y="36.92" width="200" height="9.23" fill="#B22234"></rect>
+            <rect y="46.15" width="200" height="9.23" fill="#fff"></rect>
+            <rect y="55.38" width="200" height="9.23" fill="#B22234"></rect>
+            <rect y="64.61" width="200" height="9.23" fill="#fff"></rect>
+            <rect y="73.84" width="200" height="9.23" fill="#B22234"></rect>
+            <rect y="83.07" width="200" height="9.23" fill="#fff"></rect>
+            <rect y="92.30" width="200" height="9.23" fill="#B22234"></rect>
+            <rect y="101.53" width="200" height="9.23" fill="#fff"></rect>
+            <rect y="110.76" width="200" height="9.24" fill="#B22234"></rect>
+            <rect width="80" height="64.61" fill="#3C3B6E"></rect>
+            <g fill="white" font-size="7" text-anchor="middle" font-family="serif">
+              <text x="7" y="11">★</text><text x="20" y="11">★</text><text x="33" y="11">★</text><text x="46" y="11">★</text><text x="59" y="11">★</text><text x="72" y="11">★</text>
+              <text x="13" y="19">★</text><text x="26" y="19">★</text><text x="39" y="19">★</text><text x="52" y="19">★</text><text x="65" y="19">★</text>
+              <text x="7" y="27">★</text><text x="20" y="27">★</text><text x="33" y="27">★</text><text x="46" y="27">★</text><text x="59" y="27">★</text><text x="72" y="27">★</text>
+              <text x="13" y="35">★</text><text x="26" y="35">★</text><text x="39" y="35">★</text><text x="52" y="35">★</text><text x="65" y="35">★</text>
+              <text x="7" y="43">★</text><text x="20" y="43">★</text><text x="33" y="43">★</text><text x="46" y="43">★</text><text x="59" y="43">★</text><text x="72" y="43">★</text>
+              <text x="13" y="51">★</text><text x="26" y="51">★</text><text x="39" y="51">★</text><text x="52" y="51">★</text><text x="65" y="51">★</text>
+              <text x="7" y="59">★</text><text x="20" y="59">★</text><text x="33" y="59">★</text><text x="46" y="59">★</text><text x="59" y="59">★</text><text x="72" y="59">★</text>
+            </g>
+          </svg>
+          <div class="badge-name">LANDMADE</div>
+          <div class="badge-sub">American Clothing Co.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <div class="marquee-item">T-SHIRTS <span class="m-star">★</span> HATS <span class="m-star">★</span> TANK TOPS <span class="m-star">★</span> SHORTS <span class="m-star">★</span> MADE IN THE USA <span class="m-star">★</span> FREE SHIPPING OVER $75 <span class="m-star">★</span> NEW DROPS WEEKLY <span class="m-star">★</span></div>
+    <div class="marquee-item">T-SHIRTS <span class="m-star">★</span> HATS <span class="m-star">★</span> TANK TOPS <span class="m-star">★</span> SHORTS <span class="m-star">★</span> MADE IN THE USA <span class="m-star">★</span> FREE SHIPPING OVER $75 <span class="m-star">★</span> NEW DROPS WEEKLY <span class="m-star">★</span></div>
+  </div>
+  <div class="marquee-track2">
+    <div class="marquee-item">AMERICAN PRIDE &nbsp;·&nbsp; NEXT GENERATION &nbsp;·&nbsp; COAST TO COAST &nbsp;·&nbsp; BORN FREE &nbsp;·&nbsp; LANDMADE &nbsp;·&nbsp; EST. 2024 &nbsp;·&nbsp; AMERICAN PRIDE &nbsp;·&nbsp; NEXT GENERATION &nbsp;·&nbsp; COAST TO COAST &nbsp;·&nbsp; BORN FREE &nbsp;·&nbsp; LANDMADE &nbsp;·&nbsp;</div>
+    <div class="marquee-item">AMERICAN PRIDE &nbsp;·&nbsp; NEXT GENERATION &nbsp;·&nbsp; COAST TO COAST &nbsp;·&nbsp; BORN FREE &nbsp;·&nbsp; LANDMADE &nbsp;·&nbsp; EST. 2024 &nbsp;·&nbsp; AMERICAN PRIDE &nbsp;·&nbsp; NEXT GENERATION &nbsp;·&nbsp; COAST TO COAST &nbsp;·&nbsp; BORN FREE &nbsp;·&nbsp; LANDMADE &nbsp;·&nbsp;</div>
+  </div>
+</div>
+
+<!-- CATEGORIES BENTO -->
+<section class="categories" id="shop">
+  <div class="cat-header reveal">
+    <span class="sec-label">Shop by Category</span>
+    <h2 class="sec-title">What Are You Looking For?</h2>
+  </div>
+  <div class="bento">
+    <div class="bento-card reveal" data-cat="tee">
+      <div class="bento-card-bg"><span class="bento-emoji">👕</span></div>
+      <div class="bento-ghost-text">TEE</div>
+      <div class="bento-overlay"></div>
+      <div class="bento-info">
+        <span class="bento-name">T-Shirts</span>
+        <div class="bento-meta">
+          <span class="bento-count">24 Styles Available</span>
+          <div class="bento-arrow">→</div>
+        </div>
+      </div>
+    </div>
+    <div class="bento-card reveal reveal-delay-1" data-cat="hat">
+      <div class="bento-card-bg"><span class="bento-emoji">🧢</span></div>
+      <div class="bento-ghost-text">HAT</div>
+      <div class="bento-overlay"></div>
+      <div class="bento-info">
+        <span class="bento-name">Hats</span>
+        <div class="bento-meta">
+          <span class="bento-count">16 Styles</span>
+          <div class="bento-arrow">→</div>
+        </div>
+      </div>
+    </div>
+    <div class="bento-card reveal reveal-delay-2" data-cat="tank">
+      <div class="bento-card-bg"><span class="bento-emoji">🎽</span></div>
+      <div class="bento-ghost-text">TANK</div>
+      <div class="bento-overlay"></div>
+      <div class="bento-info">
+        <span class="bento-name">Tank Tops</span>
+        <div class="bento-meta">
+          <span class="bento-count">12 Styles</span>
+          <div class="bento-arrow">→</div>
+        </div>
+      </div>
+    </div>
+    <div class="bento-card reveal reveal-delay-3" data-cat="shorts">
+      <div class="bento-card-bg"><span class="bento-emoji">🩳</span></div>
+      <div class="bento-ghost-text">SHORT</div>
+      <div class="bento-overlay"></div>
+      <div class="bento-info">
+        <span class="bento-name">Shorts</span>
+        <div class="bento-meta">
+          <span class="bento-count">10 Styles</span>
+          <div class="bento-arrow">→</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="drops">
+  <div class="products-header reveal">
+    <div>
+      <span class="sec-label">New Drops</span>
+      <h2 class="sec-title">Fresh Off The Line</h2>
+    </div>
+    <a href="file:///C:/Users/maran/Downloads/index_3.html#" class="view-all">View All Products →</a>
+  </div>
+  <div class="products-grid">
+
+    <div class="product-card reveal">
+      <div class="product-img" style="background:linear-gradient(135deg,#0c1d38,#162848);">
+        <div class="product-img-bg" style="background:radial-gradient(circle at 40% 40%,rgba(200,16,46,.15),transparent 70%);"></div>
+        <span class="product-img-emoji">👕</span>
+        <div class="product-shine"></div>
+        <div class="product-badge badge-new">New</div>
+        <button class="product-wishlist">♡</button>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Stars &amp; Stripes Tee</div>
+        <div class="product-desc">Bold eagle graphic on 100% heavyweight cotton. Built to last.</div>
+        <div class="product-footer2">
+          <div class="product-price2">$38</div>
+          <div class="product-sizes">
+            <div class="size-dot">S</div><div class="size-dot">M</div><div class="size-dot">L</div><div class="size-dot">XL</div>
+          </div>
+        </div>
+        <button class="add-to-cart">Add to Bag</button>
+      </div>
+    </div>
+
+    <div class="product-card reveal reveal-delay-1">
+      <div class="product-img" style="background:linear-gradient(135deg,#1e0810,#2a0f1a);">
+        <div class="product-img-bg" style="background:radial-gradient(circle at 60% 40%,rgba(200,16,46,.2),transparent 70%);"></div>
+        <span class="product-img-emoji">🧢</span>
+        <div class="product-shine"></div>
+        <div class="product-badge badge-hot">Best Seller</div>
+        <button class="product-wishlist">♡</button>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Freedom Snapback</div>
+        <div class="product-desc">Embroidered LANDMADE crest. Structured 6-panel, snap closure.</div>
+        <div class="product-footer2">
+          <div class="product-price2">$34</div>
+          <div class="product-sizes">
+            <div class="size-dot">S/M</div><div class="size-dot">L/XL</div>
+          </div>
+        </div>
+        <button class="add-to-cart">Add to Bag</button>
+      </div>
+    </div>
+
+    <div class="product-card reveal reveal-delay-2">
+      <div class="product-img" style="background:linear-gradient(135deg,#07181a,#0c2225);">
+        <div class="product-img-bg" style="background:radial-gradient(circle at 50% 50%,rgba(20,180,120,.12),transparent 70%);"></div>
+        <span class="product-img-emoji">🎽</span>
+        <div class="product-shine"></div>
+        <div class="product-badge badge-new">New</div>
+        <button class="product-wishlist">♡</button>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Coast to Coast Tank</div>
+        <div class="product-desc">Lightweight muscle tank with vintage USA map print. Summer ready.</div>
+        <div class="product-footer2">
+          <div class="product-price2">$28</div>
+          <div class="product-sizes">
+            <div class="size-dot">S</div><div class="size-dot">M</div><div class="size-dot">L</div><div class="size-dot">XL</div>
+          </div>
+        </div>
+        <button class="add-to-cart">Add to Bag</button>
+      </div>
+    </div>
+
+    <div class="product-card reveal reveal-delay-1">
+      <div class="product-img" style="background:linear-gradient(135deg,#18140a,#241c0e);">
+        <div class="product-img-bg" style="background:radial-gradient(circle at 40% 60%,rgba(200,145,26,.15),transparent 70%);"></div>
+        <span class="product-img-emoji">🩳</span>
+        <div class="product-shine"></div>
+        <button class="product-wishlist">♡</button>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Republic Shorts</div>
+        <div class="product-desc">7" inseam, woven flag patch, two side pockets. All-day comfort.</div>
+        <div class="product-footer2">
+          <div class="product-price2">$45</div>
+          <div class="product-sizes">
+            <div class="size-dot">S</div><div class="size-dot">M</div><div class="size-dot">L</div><div class="size-dot">XL</div>
+          </div>
+        </div>
+        <button class="add-to-cart">Add to Bag</button>
+      </div>
+    </div>
+
+    <div class="product-card reveal reveal-delay-2">
+      <div class="product-img" style="background:linear-gradient(135deg,#0c1d38,#182e52);">
+        <div class="product-img-bg" style="background:radial-gradient(circle at 55% 35%,rgba(200,16,46,.18),transparent 65%);"></div>
+        <span class="product-img-emoji">👕</span>
+        <div class="product-shine"></div>
+        <div class="product-badge badge-ltd">Limited</div>
+        <button class="product-wishlist">♡</button>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Land of the Free Tee</div>
+        <div class="product-desc">Washed vintage feel, oversized fit, front &amp; back graphic print.</div>
+        <div class="product-footer2">
+          <div class="product-price2">$42</div>
+          <div class="product-sizes">
+            <div class="size-dot">S</div><div class="size-dot">M</div><div class="size-dot">L</div><div class="size-dot">XL</div>
+          </div>
+        </div>
+        <button class="add-to-cart">Add to Bag</button>
+      </div>
+    </div>
+
+    <div class="product-card reveal reveal-delay-3">
+      <div class="product-img" style="background:linear-gradient(135deg,#1a0810,#280d18);">
+        <div class="product-img-bg" style="background:radial-gradient(circle at 45% 45%,rgba(200,16,46,.15),transparent 65%);"></div>
+        <span class="product-img-emoji">🧢</span>
+        <div class="product-shine"></div>
+        <button class="product-wishlist">♡</button>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Iron Eagle Dad Hat</div>
+        <div class="product-desc">Unstructured low profile, stone-washed, embroidered eagle crest.</div>
+        <div class="product-footer2">
+          <div class="product-price2">$30</div>
+          <div class="product-sizes">
+            <div class="size-dot">One Size</div>
+          </div>
+        </div>
+        <button class="add-to-cart">Add to Bag</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BRAND BANNER -->
+<section class="banner" id="story">
+  <div class="banner-text reveal">
+    <span class="banner-label">Our Story</span>
+    <h2 class="banner-title">Made From<br>The Land Up.</h2>
+    <p class="banner-body">LANDMADE was born from a simple idea — American clothing that actually represents the next generation. Not costumes. Not clichés. Real gear for people proud of where they're from.</p>
+    <div class="banner-stats">
+      <div><span class="bstat-num">50+</span><span class="bstat-label">Designs</span></div>
+      <div><span class="bstat-num">5K+</span><span class="bstat-label">Customers</span></div>
+      <div><span class="bstat-num">100%</span><span class="bstat-label">American Pride</span></div>
+    </div>
+  </div>
+  <div class="banner-visual reveal reveal-delay-2">
+    <div class="banner-card">
+      <span class="banner-card-icon">🦅</span>
+      <div class="banner-card-title">American Design</div>
+      <div class="banner-card-text">Every graphic created by American artists for American culture.</div>
+    </div>
+    <div class="banner-card">
+      <span class="banner-card-icon">⭐</span>
+      <div class="banner-card-title">Premium Quality</div>
+      <div class="banner-card-text">Heavyweight fabrics, double-stitched, built to outlast the season.</div>
+    </div>
+    <div class="banner-card">
+      <span class="banner-card-icon">📦</span>
+      <div class="banner-card-title">Fast Shipping</div>
+      <div class="banner-card-text">Free shipping over $75. Ships within 2 business days.</div>
+    </div>
+    <div class="banner-card">
+      <span class="banner-card-icon">🔄</span>
+      <div class="banner-card-title">Easy Returns</div>
+      <div class="banner-card-text">30-day hassle-free returns. No questions asked.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="test-header reveal">
+    <span class="sec-label">Customer Love</span>
+    <h2 class="sec-title">What People Are Saying</h2>
+  </div>
+  <div class="test-grid">
+    <div class="test-card reveal">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-quote">"Finally a brand that gets it. The quality is insane — washed my Stars &amp; Stripes tee 20 times and it still looks fire. This is my everyday brand now."</p>
+      <div class="test-author">
+        <div class="test-avatar">🤙</div>
+        <div><div class="test-name">Jake M.</div><div class="test-location">Austin, TX</div></div>
+      </div>
+    </div>
+    <div class="test-card reveal reveal-delay-1">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-quote">"The Freedom Snapback is everywhere in my city. Great fit, bold design. I get compliments every single time I wear it out."</p>
+      <div class="test-author">
+        <div class="test-avatar">🧢</div>
+        <div><div class="test-name">Marcus T.</div><div class="test-location">Chicago, IL</div></div>
+      </div>
+    </div>
+    <div class="test-card reveal reveal-delay-2">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-quote">"Ordered the Republic Shorts and the tank in the same order. Both fit perfectly and shipped in 2 days. This brand is legit — will be back for more."</p>
+      <div class="test-author">
+        <div class="test-avatar">🇺🇸</div>
+        <div><div class="test-name">Alyssa R.</div><div class="test-location">Nashville, TN</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter" id="contact">
+  <span class="newsletter-label reveal">Stay in the loop</span>
+  <h2 class="newsletter-title reveal">Join The<br>Movement</h2>
+  <p class="newsletter-sub reveal">Early access to drops, exclusive deals, and American energy in your inbox.</p>
+  <div class="newsletter-form reveal">
+    <input class="nl-input" id="nlInput" type="email" placeholder="your@email.com">
+    <button class="nl-btn" id="nlBtn">Subscribe</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo2">LAND<span>MADE</span></div>
+      <p class="footer-tagline2">American clothing for the next generation. Bold designs, real quality, worn from coast to coast.</p>
+      <div class="footer-socials">
+        <a class="soc" href="file:///C:/Users/maran/Downloads/index_3.html#">IG</a>
+        <a class="soc" href="file:///C:/Users/maran/Downloads/index_3.html#">TK</a>
+        <a class="soc" href="file:///C:/Users/maran/Downloads/index_3.html#">TW</a>
+        <a class="soc" href="file:///C:/Users/maran/Downloads/index_3.html#">FB</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-h">Shop</div>
+      <ul class="footer-links2">
+        <li><a href="file:///C:/Users/maran/Downloads/index_3.html#">T-Shirts</a></li>
+        <li><a href="file:///C:/Users/maran/Downloads/index_3.html#">Hats</a></li>
+        <li><a href="file:///C:/Users/maran/Downloads/index_3.html#">Tank Tops</a></li>
+        <li><a href="file:///C:/Users/maran/Downloads/index_3.html#">Shorts</a></li>
+        <li><a href="file:///C:/Users/maran/Downloads/index_3.html#">New Arrivals</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-h">Brand</div>
+      <ul class="footer-links2">
+        <li><a href="file:///C:/Users/maran/Downloads/index_3.html#">Our Story</a></li>
+        <li><a href="file:///C:/Users/maran/Downloads/index_3.html#">Sizing Guide</a></li>
+        <li><a href="file:///C:/Users/maran/Downloads/index_3.html#">Lookbook</a></li>
+        <li><a href="file:///C:/Users/maran/Downloads/index_3.html#">Collaborations</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-h">Support</div>
+      <ul class="footer-links2">
+        <li><a href="file:///C:/Users/maran/Downloads/index_3.html#">Contact Us</a></li>
+        <li><a href="file:///C:/Users/maran/Downloads/index_3.html#">FAQ</a></li>
+        <li><a href="file:///C:/Users/maran/Downloads/index_3.html#">Track Order</a></li>
+        <li><a href="file:///C:/Users/maran/Downloads/index_3.html#">Returns</a></li>
+        <li><a href="file:///C:/Users/maran/Downloads/index_3.html#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom2">
+    <span>© 2024 LANDMADE American Clothing Co. All rights reserved.</span>
+    <span>🇺🇸 Proud to be American</span>
+  </div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✓ Added to your bag</div>
+
+<script>
+// CUSTOM CURSOR
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+function lerpRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(lerpRing);}
+lerpRing();
+document.querySelectorAll('a,button,.bento-card,.product-card,.banner-card,.test-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.classList.add('hovered');ring.classList.add('hovered');});
+  el.addEventListener('mouseleave',()=>{cursor.classList.remove('hovered');ring.classList.remove('hovered');});
+});
+
+// PARTICLE CANVAS
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+const particles=[];
+for(let i=0;i<60;i++){
+  particles.push({
+    x:Math.random()*canvas.width,y:Math.random()*canvas.height,
+    r:Math.random()*1.5+.3,
+    vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,
+    o:Math.random()*.4+.05,
+    c:Math.random()>.7?'200,16,46':'255,255,255'
+  });
+}
+function drawParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(${p.c},${p.o})`;ctx.fill();
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;
+    if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;
+  });
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+// NAV SCROLL
+window.addEventListener('scroll',()=>{
+  document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);
+});
+
+// SCROLL REVEAL
+const revealEls=document.querySelectorAll('.reveal');
+const ro=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('revealed');});
+},{threshold:.12});
+revealEls.forEach(el=>ro.observe(el));
+
+// CART
+let cartCount=0;
+const cartBtn=document.getElementById('cartBtn');
+const toast=document.getElementById('toast');
+function showToast(){
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'),2500);
+}
+document.querySelectorAll('.add-to-cart').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    cartCount++;
+    cartBtn.textContent=`Bag (${cartCount})`;
+    btn.textContent='Added ✓';btn.classList.add('added');
+    showToast();
+    setTimeout(()=>{btn.textContent='Add to Bag';btn.classList.remove('added');},2000);
+  });
+});
+
+// WISHLIST
+document.querySelectorAll('.product-wishlist').forEach(btn=>{
+  btn.addEventListener('click',e=>{
+    e.stopPropagation();
+    btn.textContent=btn.textContent==='♡'?'♥':'♡';
+    btn.style.color=btn.textContent==='♥'?'var(--red)':'';
+  });
+});
+
+// NEWSLETTER
+document.getElementById('nlBtn').addEventListener('click',()=>{
+  const input=document.getElementById('nlInput');
+  if(input.value.includes('@')){
+    input.value='';input.placeholder='✓ Welcome to the movement!';
+  }
+});
+</script>
+
+
+</body></html>
